@@ -77,4 +77,15 @@ public class TomatoTask extends BaseObservable{
         isCompleted = completed;
         notifyPropertyChanged(BR.completed);
     }
+
+    @Override
+    public String toString() {
+        return "TomatoTask{" +
+                "dateCompletedDate=" + dateCompletedDate +
+                ", dateCreateDate=" + dateCreateDate +
+                ", strTitle='" + strTitle + '\'' +
+                ", strContent='" + strContent + '\'' +
+                ", isCompleted=" + isCompleted +
+                "} " + super.toString();
+    }
 }
