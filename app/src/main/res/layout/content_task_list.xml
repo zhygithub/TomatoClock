@@ -6,16 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="network.scau.com.tomatoclock.TaskListActivity"
+    tools:context="network.scau.com.tomatoclock.view.TaskListActivity"
     tools:showIn="@layout/activity_task_list">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="@+id/content_task_list"
-        app:layout_constraintLeft_toLeftOf="@+id/content_task_list"
-        app:layout_constraintRight_toRightOf="@+id/content_task_list"
-        app:layout_constraintTop_toTopOf="@+id/content_task_list" />
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>
