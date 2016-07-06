@@ -4,4 +4,11 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="item_recycle_gb_corner">16dp</dimen>
+    <dimen name="activity_normal_textsize_M">14sp</dimen>
+    <dimen name="activity_normal_textsize_L">16sp</dimen>
+    <dimen name="activity_normal_textsize_XL">18sp</dimen>
+    <dimen name="activity_normal_textsize_XXL">20sp</dimen>
+    <dimen name="normal_padding">5dp</dimen>
+    <dimen name="activity_newtask_edit_title_height">60dp</dimen>
+    <dimen name="activity_newtask_edit_content_minheight">300dp</dimen>
 </resources>

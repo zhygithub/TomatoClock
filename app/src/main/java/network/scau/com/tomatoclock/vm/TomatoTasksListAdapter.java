@@ -27,37 +27,45 @@ import rx.functions.Func1;
 
 public class TomatoTasksListAdapter extends RecyclerView.Adapter {
 
+    /**源数据 */
     private List<TomatoTask> sourceData;
 
+    /**上下文 */
     private Context context;
 
-    private Action1<Integer> deleteCommand;
-    private Action1<Integer> completeCommand;
-
-    private Func1<Integer,Void> deleteEvent;
-    private Func1<Integer,Void> completeEvent;
+    /**删除事件 */
+    private Action1<Integer> deleteEvent;
+    /**完成事件 */
+    private Action1<Integer> completeEvent;
 
     public TomatoTasksListAdapter() {
-        deleteEvent = new Func1<Integer, Void>() {
+        deleteEvent =new Action1<Integer>(){
             @Override
-            public Void call(Integer integer) {
-                if(sourceData!=null){
+            public void call(Integer integer) {
+                if (sourceData != null) {
+                    //以下三个顺序不能缺少和替换，先删除源数据，然后展示动画，最后对于以后的项目进行范围更新
                     sourceData.remove(integer.intValue());
+                    TomatoTasksListAdapter.this.notifyItemRemoved(integer);
+                    TomatoTasksListAdapter.this.notifyItemRangeChanged(integer,sourceData.size());
                 }
-                return null;
             }
         };
 
-        completeEvent = new Func1<Integer, Void>() {
+        completeEvent =new Action1<Integer>(){
             @Override
-            public Void call(Integer integer) {
-                if(sourceData!=null){
+            public void call(Integer integer) {
+                if (sourceData != null) {
                     sourceData.get(integer).setCompleted(true);
+                    TomatoTasksListAdapter.this.notifyItemChanged(integer);
+                    TomatoTasksListAdapter.this.notifyDataSetChanged();
                 }
-                return null;
             }
         };
+    }
 
+    public TomatoTasksListAdapter(List<TomatoTask> sourceData) {
+        this();
+        this.sourceData = sourceData;
     }
 
     @Override
@@ -72,25 +80,25 @@ public class TomatoTasksListAdapter extends RecyclerView.Adapter {
         if (sourceData == null) {
             return;
         }
-        Log.d("Tomato", "task = " + sourceData.get(position).getStrTitle());
         TomatoTask task = sourceData.get(position);
-
         TomatoTaskViewHolder viewholder = ((TomatoTaskViewHolder) holder);
+
 
         viewholder.title.setText(task.getStrTitle());
         viewholder.content.setText(task.getStrContent());
         viewholder.isCompleted.setBackgroundColor(task.isCompleted() ? context.getColor(R.color.colorCompleted) : context.getColor(R.color.colorAccent));
 
-        setClick(viewholder.delete,deleteCommand,position);
-        setClick(viewholder.isCompleted,completeCommand,position);
+        setClick(viewholder.delete, deleteEvent, position);
+        setClick(viewholder.isCompleted, completeEvent, position);
 
     }
 
-    private void setClick(View view,final Action1 action,final int position){
+    /**设置按钮点击事件 */
+    private void setClick(View view, final Action1<Integer> innerEvent, final int position) {
         RxView.clicks(view).throttleFirst(1, TimeUnit.SECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                Observable.just(position).observeOn(AndroidSchedulers.mainThread()).subscribe(action);
+                Observable.just(position).observeOn(AndroidSchedulers.mainThread()).subscribe(innerEvent);
             }
         });
     }
@@ -116,24 +124,6 @@ public class TomatoTasksListAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public Action1<Integer> getCompleteCommand() {
-        return completeCommand;
-    }
 
-    public void setCompleteCommand(Action1<Integer> completeCommand) {
-        this.completeCommand = completeCommand;
-    }
 
-    public Action1<Integer> getDeleteCommand() {
-        return deleteCommand;
-    }
-
-    public void setDeleteCommand(Action1<Integer> deleteCommand) {
-        this.deleteCommand = deleteCommand;
-    }
-
-    public TomatoTasksListAdapter(List<TomatoTask> sourceData) {
-        this.sourceData = sourceData;
-
-    }
 }

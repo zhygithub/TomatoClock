@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">TomatoClock</string>
     <string name="action_settings">Settings</string>
+    <string name="acticity_newtask_back">drop</string>
+    <string name="acticity_newtask_create">create</string>
+    <string name="acticity_newtask_title">New Tomato</string>
+    <string name="acticity_newtask_edit_title_hint">Your Tomato Name</string>
+    <string name="acticity_newtask_edit_content_hint">Your Tomato Description</string>
 </resources>

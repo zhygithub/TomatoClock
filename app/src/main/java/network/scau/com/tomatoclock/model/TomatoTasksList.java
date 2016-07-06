@@ -54,7 +54,7 @@ public class TomatoTasksList {
 
         ArrayList<TomatoTask> tomatoTasks = new ArrayList<>();
         TomatoTask tomatoTask;
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 14; i++) {
             tomatoTask = new TomatoTask();
             tomatoTask.setStrTitle("test " + i);
             tomatoTask.setCompleted(i % 3 == 0 ? true : false);

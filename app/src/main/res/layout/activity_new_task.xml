@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+   >
+    <data>
+        <variable
+            name="task"
+            type="network.scau.com.tomatoclock.model.TomatoTask"/>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <RelativeLayout
+            android:id="@+id/rl1"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            >
+
+            <Button
+                android:id="@+id/drop_tomato"
+                android:layout_margin="@dimen/normal_padding"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:text="@string/acticity_newtask_back"
+                android:textColor="@color/colorBgWhite"
+                android:textSize="@dimen/activity_normal_textsize_M"
+                android:background="@drawable/item_recycle_bg_green_no_border"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/acticity_newtask_title"
+                android:layout_centerInParent="true"
+                android:textColor="@color/colorBgWhite"
+                android:textSize="@dimen/activity_normal_textsize_XXL"
+                />
+
+            <Button
+                android:id="@+id/create_tomato"
+                android:textColor="@color/colorBgWhite"
+                android:layout_alignParentRight="true"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_margin="@dimen/normal_padding"
+                android:text="@string/acticity_newtask_create"
+                android:textSize="@dimen/activity_normal_textsize_M"
+                android:background="@drawable/item_recycle_bg_green_no_border"
+                android:layout_centerVertical="true"
+                 />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@id/rl1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBgWhite"
+            >
+
+            <EditText
+                android:id="@+id/edt_title"
+                android:layout_margin="@dimen/normal_padding"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_newtask_edit_title_height"
+                android:hint="@string/acticity_newtask_edit_title_hint"
+                android:textSize="@dimen/activity_normal_textsize_L"
+                android:textColor="@color/colorTextWhite"
+                android:background="@color/colorPrimaryDark"
+                android:paddingLeft="@dimen/normal_padding"
+                />
+
+            <EditText
+                android:id="@+id/edt_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextWhite"
+                android:minHeight="@dimen/activity_newtask_edit_content_minheight"
+                android:hint="@string/acticity_newtask_edit_content_hint"
+                android:textSize="@dimen/activity_normal_textsize_L"
+                android:background="@color/colorPrimaryDark"
+                android:paddingLeft="@dimen/normal_padding"
+                android:layout_margin="@dimen/normal_padding"
+                android:layout_below="@+id/edt_title"
+                 />
+
+            <Button
+                android:layout_margin="@dimen/normal_padding"
+                android:background="@drawable/item_recycle_bg_yellow_no_border"
+                android:text="Select Your Time"
+                android:textColor="@color/colorTextWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/btn_picktime" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</layout>
