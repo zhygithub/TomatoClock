@@ -1,6 +1,7 @@
 package network.scau.com.tomatoclock.vm;
 
 import android.content.Intent;
+import android.view.View;
 
 import java.util.List;
 
@@ -45,4 +46,10 @@ public class TasksListVm {
     public List<TomatoTask> getSourceData(){
         return tomatoTasksList.getListLotalTasks();
     }
+
+    public void backToListActivity(View view){
+        newTaskActivity.showQuitDialog();
+//        newTaskActivity.finish();
+    }
+
 }

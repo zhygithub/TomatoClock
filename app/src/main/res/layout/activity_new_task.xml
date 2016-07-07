@@ -8,6 +8,10 @@
             name="task"
             type="network.scau.com.tomatoclock.model.TomatoTask"/>
 
+        <variable
+            name="vm"
+            type="network.scau.com.tomatoclock.vm.TasksListVm"/>
+
     </data>
 
     <RelativeLayout
@@ -32,6 +36,7 @@
                 android:textSize="@dimen/activity_normal_textsize_M"
                 android:background="@drawable/item_recycle_bg_green_no_border"
                 android:layout_centerVertical="true"
+                android:onClick="@{vm.backToListActivity}"
                 />
 
             <TextView

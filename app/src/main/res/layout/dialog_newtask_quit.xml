@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_title_height"
+        android:background="@drawable/item_recycle_bg_yellow_no_border_top_round"
+        android:gravity="center"
+        android:text="title"
+        android:textColor="@color/colorTextWhite"
+        android:textSize="@dimen/activity_normal_textsize_L" />
+
+    <TextView
+        android:paddingLeft="@dimen/normal_padding"
+        android:paddingRight="@dimen/normal_padding"
+        android:id="@+id/dialog_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_title"
+        android:background="@drawable/dialog_white_bg_yellow_border"
+        android:gravity="center"
+        android:minHeight="100dp"
+        android:text="title"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/activity_normal_textsize_L" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/item_recycle_bg_yellow_no_border_bottom_round"
+        android:layout_below="@id/dialog_content"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/dialog_btn_left"
+            android:text="left"
+            android:textColor="@color/colorTextWhite"
+            android:textSize="@dimen/activity_normal_textsize_M"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/dialog_btn_ripple"
+            />
+
+        <Button
+            android:id="@+id/dialog_btn_right"
+            android:text="right"
+            android:textColor="@color/colorTextWhite"
+            android:textSize="@dimen/activity_normal_textsize_M"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/dialog_btn_ripple"
+            />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
