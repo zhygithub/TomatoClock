@@ -2,10 +2,12 @@
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="@color/colorPrimary"
     >
+
     <item >
         <shape android:shape="rectangle" />
         <solid android:color="@color/colorPrimary" />
         <corners android:radius="4dp" />
     </item>
-    <item android:id="@android:id/mask" android:drawable="@drawable/item_recycle_bg_yellow_no_border_bottom_round" />
+    <item
+        android:id="@android:id/mask" android:drawable="@drawable/activity_newtask_selecttime_bg" />
 </ripple>

@@ -49,7 +49,14 @@ public class TasksListVm {
 
     public void backToListActivity(View view){
         newTaskActivity.showQuitDialog();
-//        newTaskActivity.finish();
+    }
+
+    public void newTaskActivityFinish(View view){
+        newTaskActivity.finish();
+    }
+
+    public void cancleBackToListActivity(View view){
+        newTaskActivity.dismissQuitDialog();
     }
 
 }

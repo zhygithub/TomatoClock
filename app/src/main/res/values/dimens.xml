@@ -13,4 +13,7 @@
     <dimen name="activity_newtask_edit_content_minheight">300dp</dimen>
 
     <dimen name="dialog_title_height">40dp</dimen>
+
+    <dimen name="activity_newtask_bar_btn_height">40dp</dimen>
+    <dimen name="activity_newtask_selecttime_height">40dp</dimen>
 </resources>
