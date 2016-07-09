@@ -54,6 +54,7 @@
                 android:layout_margin="@dimen/normal_padding"
                 android:background="@drawable/item_recycle_bg_green_no_border"
                 android:text="@string/acticity_newtask_create"
+                android:onClick="@{vm.btnCreateNewTask}"
                 android:textColor="@color/colorBgWhite"
                 android:textSize="@dimen/activity_normal_textsize_M" />
 
@@ -92,17 +93,38 @@
                 android:textSize="@dimen/activity_normal_textsize_L" />
 
 s
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/activity_newtask_selecttime_height"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="@dimen/normal_padding"
+                android:orientation="horizontal"
                 android:background="@drawable/activity_newtask_selecttime_bg">
 
                 <TextView
+                    android:id="@+id/tv_pickdate"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_choose_time"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:onClick="@{vm.selectYourDate}"
+                    android:text="Select Your Date"
+                    android:textColor="@color/colorTextWhite"
+                    android:textSize="@dimen/activity_normal_textsize_M" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorBgWhite"/>
+
+                <TextView
                     android:id="@+id/tv_picktime"
-                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/ripple_choose_time"
                     android:clickable="true"
@@ -113,7 +135,7 @@ s
                     android:textColor="@color/colorTextWhite"
                     android:textSize="@dimen/activity_normal_textsize_M" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
 
         </RelativeLayout>

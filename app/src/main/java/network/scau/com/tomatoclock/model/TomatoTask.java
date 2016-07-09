@@ -80,12 +80,14 @@ public class TomatoTask extends BaseObservable{
 
     @Override
     public String toString() {
+        String complete = dateCompletedDate == null ? "" : dateCompletedDate.toString();
+        String create = dateCreateDate == null ? "" : dateCreateDate.toString();
         return "TomatoTask{" +
-                "dateCompletedDate=" + dateCompletedDate +
-                ", dateCreateDate=" + dateCreateDate +
+                "dateCompletedDate=" + complete +
+                ", dateCreateDate=" + create+
                 ", strTitle='" + strTitle + '\'' +
                 ", strContent='" + strContent + '\'' +
                 ", isCompleted=" + isCompleted +
-                "} " + super.toString();
+                "} " ;
     }
 }

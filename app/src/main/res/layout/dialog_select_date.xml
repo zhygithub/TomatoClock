@@ -3,7 +3,7 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data
-         class=".SelectTimeBinding"
+         class=".SelectDateBinding"
         >
 
         <variable
@@ -27,18 +27,18 @@
             android:textColor="@color/colorTextWhite"
             android:textSize="@dimen/activity_normal_textsize_L" />
 
-
-        <TimePicker
-            android:background="@color/colorPrimaryDark"
-            android:id="@+id/dialog_timepicker"
+        <DatePicker
+            android:layout_below="@id/dialog_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_below="@id/dialog_datepicker"
-          />
+            android:id="@+id/dialog_datepicker"
+            android:datePickerMode="calendar"
+            android:background="@color/colorPrimaryDark"
+            />
+
 
         <View
-            android:layout_below="@id/dialog_timepicker"
+            android:layout_below="@id/dialog_datepicker"
             android:id="@+id/border"
             android:layout_width="match_parent"
             android:layout_height="@dimen/normal_padding"
@@ -59,7 +59,7 @@
                 android:background="@drawable/dialog_btn_ripple"
                 android:text="left"
                 android:textColor="@color/colorTextWhite"
-                android:onClick="@{vm.cancleSelectTime}"
+                android:onClick="@{vm.cancleSelectDate}"
                 android:textSize="@dimen/activity_normal_textsize_M" />
 
             <Button
@@ -69,7 +69,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/dialog_btn_ripple"
                 android:text="right"
-                android:onClick="@{vm.cancleSelectTime}"
+                android:onClick="@{vm.cancleSelectDate}"
                 android:textColor="@color/colorTextWhite"
                 android:textSize="@dimen/activity_normal_textsize_M" />
 
