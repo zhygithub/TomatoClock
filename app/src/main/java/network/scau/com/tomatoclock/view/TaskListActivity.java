@@ -1,15 +1,8 @@
 package network.scau.com.tomatoclock.view;
 
 import android.databinding.DataBindingUtil;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
@@ -65,7 +58,7 @@ public class TaskListActivity extends BaseActivity {
                     public void call(Void aVoid) {
 //                        Snackbar.make(binding.fab, "Add a new task", Snackbar.LENGTH_LONG)
 //                                .setAction("Action", null).show();
-                        tasksListVm.addTask();
+                        tasksListVm.intoNewTaskActivity();
                     }
                 });
     }

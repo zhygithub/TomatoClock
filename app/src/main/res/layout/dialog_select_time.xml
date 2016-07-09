@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data
+         class=".SelectTimeBinding"
+        >
+
+        <variable
+            name="vm"
+            type="network.scau.com.tomatoclock.vm.TasksListVm"/>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dialog_title_height"
+            android:background="@drawable/item_recycle_bg_yellow_no_border_top_round"
+            android:gravity="center"
+            android:text="title"
+            android:textColor="@color/colorTextWhite"
+            android:textSize="@dimen/activity_normal_textsize_L" />
+
+        <TimePicker
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/dialog_timepicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@id/dialog_title"
+          />
+
+        <View
+            android:layout_below="@id/dialog_timepicker"
+            android:id="@+id/border"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normal_padding"
+            android:background="@color/colorPrimaryDark"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/border"
+            android:background="@drawable/item_recycle_bg_yellow_no_border_bottom_round"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/dialog_btn_left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/dialog_btn_ripple"
+                android:text="left"
+                android:textColor="@color/colorTextWhite"
+                android:onClick="@{vm.cancleSelectTime}"
+                android:textSize="@dimen/activity_normal_textsize_M" />
+
+            <Button
+                android:id="@+id/dialog_btn_right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/dialog_btn_ripple"
+                android:text="right"
+                android:onClick="@{vm.cancleSelectTime}"
+                android:textColor="@color/colorTextWhite"
+                android:textSize="@dimen/activity_normal_textsize_M" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

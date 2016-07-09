@@ -108,6 +108,7 @@ s
                     android:clickable="true"
                     android:gravity="center"
                     android:padding="10dp"
+                    android:onClick="@{vm.selectYourTime}"
                     android:text="Select Your Time"
                     android:textColor="@color/colorTextWhite"
                     android:textSize="@dimen/activity_normal_textsize_M" />

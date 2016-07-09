@@ -27,6 +27,7 @@ public class TasksListVm {
 
     private TomatoTasksListAdapter tasksListAdapter;
 
+
     public TasksListVm(TaskListActivity taskListActivity) {
         this.taskListActivity = taskListActivity;
     }
@@ -39,24 +40,44 @@ public class TasksListVm {
         this.newTaskActivity = newTaskActivity;
     }
 
-    public void addTask(){
+
+    // --------------------- 以下为业务逻辑 ----------------------
+
+    /**进入创建新Taskactivity */
+    public void intoNewTaskActivity(){
         taskListActivity.startActivity(new Intent(taskListActivity,NewTaskActivity.class));
     }
 
+    /**获得当前所有Task列表 */
     public List<TomatoTask> getSourceData(){
         return tomatoTasksList.getListLotalTasks();
     }
 
+    /**从新任务activity回到主activity */
     public void backToListActivity(View view){
         newTaskActivity.showQuitDialog();
     }
 
+    /**新任务activity结束 */
     public void newTaskActivityFinish(View view){
         newTaskActivity.finish();
     }
 
+    /**取消 从新任务activity回到主activity*/
     public void cancleBackToListActivity(View view){
         newTaskActivity.dismissQuitDialog();
     }
+
+    /**选择新任务开始时间 */
+    public void selectYourTime(View view){
+        newTaskActivity.showSelectTimeDialog();
+    }
+
+    /**取消选择任务开始时间 */
+    public void cancleSelectTime(View view){
+        newTaskActivity.dismissSelectTimeDialog();
+    }
+
+
 
 }

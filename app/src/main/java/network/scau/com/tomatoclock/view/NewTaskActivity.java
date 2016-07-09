@@ -8,6 +8,7 @@ import android.view.View;
 
 import network.scau.com.tomatoclock.QuitDialogBinding;
 import network.scau.com.tomatoclock.R;
+import network.scau.com.tomatoclock.SelectTimeBinding;
 import network.scau.com.tomatoclock.base.BaseActivity;
 import network.scau.com.tomatoclock.databinding.ActivityNewTaskBinding;
 import network.scau.com.tomatoclock.model.TomatoTask;
@@ -23,6 +24,8 @@ public class NewTaskActivity extends BaseActivity{
 
 
     private DialogShow quitDialog;
+
+    private DialogShow timeDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,8 @@ public class NewTaskActivity extends BaseActivity{
     private void init() {
 
         initQuitDialog();
+
+        initSelectTimeDialog();
 
     }
 
@@ -74,6 +79,36 @@ public class NewTaskActivity extends BaseActivity{
     public void dismissQuitDialog(){
         if(quitDialog!=null){
             quitDialog.dismiss();
+        }
+
+    }
+
+    /**初始化 选择时间弹窗 */
+    public void initSelectTimeDialog(){
+        LayoutInflater inflater = LayoutInflater.from(this);
+//        View view = View.inflate(this, R.layout.dialog_newtask_quit, null);
+
+        SelectTimeBinding selectTimeBinding = DataBindingUtil.inflate(inflater,R.layout.dialog_select_time,null,false);
+        selectTimeBinding.setVm(tasksListVm);
+        selectTimeBinding.dialogBtnLeft.setText("OK");
+        selectTimeBinding.dialogBtnRight.setText("NO");
+        selectTimeBinding.dialogTitle.setText("SELECT TIME");
+
+        timeDialog = new DialogShow(this, selectTimeBinding.getRoot());
+    }
+
+    /**展示 退出弹窗 */
+    public void showSelectTimeDialog(){
+        if(timeDialog!=null){
+            timeDialog.show();
+        }
+
+    }
+
+    /**隐藏 退出弹窗 */
+    public void dismissSelectTimeDialog(){
+        if(timeDialog!=null){
+            timeDialog.dismiss();
         }
 
     }
