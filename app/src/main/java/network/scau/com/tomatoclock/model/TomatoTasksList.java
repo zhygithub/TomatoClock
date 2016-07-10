@@ -1,10 +1,15 @@
 package network.scau.com.tomatoclock.model;
 
 
+import android.content.Context;
 import android.util.Log;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import network.scau.com.tomatoclock.tools.FileUtils;
 
 /**
  * Created by ZhengHy on 2016/7/5 0005.
@@ -17,20 +22,30 @@ public class TomatoTasksList {
      */
     private List<TomatoTask> listLotalTasks = null;
 
-    private TomatoTasksList() {
 
+    private TomatoTasksList() {
         checkListIsNull();
     }
 
+    public static TomatoTasksList getInstance(List<TomatoTask> listLotalTasks) {
+//        if (IntanceHolder.INSTANCE == null) {
+        IntanceHolder.INSTANCE = new TomatoTasksList(listLotalTasks);
+//        }
+        return IntanceHolder.INSTANCE;
+    }
+
     public static TomatoTasksList getInstance() {
+        if (IntanceHolder.INSTANCE == null) {
+            IntanceHolder.INSTANCE = new TomatoTasksList();
+        }
         return IntanceHolder.INSTANCE;
     }
 
     private static class IntanceHolder {
-        public static TomatoTasksList INSTANCE = new TomatoTasksList();
+        public static TomatoTasksList INSTANCE;
     }
 
-    public TomatoTasksList(List<TomatoTask> listLotalTasks) {
+    private TomatoTasksList(List<TomatoTask> listLotalTasks) {
         this.listLotalTasks = listLotalTasks;
     }
 
@@ -42,39 +57,11 @@ public class TomatoTasksList {
         this.listLotalTasks = listLotalTasks;
     }
 
-    private String text1 = "abdjsdkfjksdkjkjflsd";
-
-    private String text2 = "abdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsd";
-
-    private String text3 = "abdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfj";
-    /**
-     * 读取本地的任务列表，使用Rx读取
-     */
-    private List<TomatoTask> readLocalList() {
-
-        ArrayList<TomatoTask> tomatoTasks = new ArrayList<>();
-        TomatoTask tomatoTask;
-        for (int i = 0; i < 14; i++) {
-            tomatoTask = new TomatoTask();
-            tomatoTask.setStrTitle("test " + i);
-            tomatoTask.setCompleted(i % 3 == 0 ? true : false);
-            switch (i%3){
-                case 0:
-                    tomatoTask.setStrContent(text1);
-                    break;
-                case 1:
-                    tomatoTask.setStrContent(text2);
-                    break;
-                case 2:
-                    tomatoTask.setStrContent(text3);
-                    break;
-            }
-
-            tomatoTasks.add(tomatoTask);
-        }
-
-        return tomatoTasks;
-    }
+//    private String text1 = "abdjsdkfjksdkjkjflsd";
+//
+//    private String text2 = "abdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsd";
+//
+//    private String text3 = "abdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfjksdkjkjflsdabdjsdkfj";
 
 
     /**
@@ -102,7 +89,7 @@ public class TomatoTasksList {
     private void checkListIsNull() {
         if (listLotalTasks == null) {
             Log.d("Tomato", "readLocalList");
-            listLotalTasks = readLocalList();
+            listLotalTasks = new ArrayList<>();
         }
     }
 

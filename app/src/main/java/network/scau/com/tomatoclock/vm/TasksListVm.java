@@ -4,14 +4,24 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
 import network.scau.com.tomatoclock.base.BaseApplication;
 import network.scau.com.tomatoclock.model.TomatoTask;
 import network.scau.com.tomatoclock.model.TomatoTasksList;
+import network.scau.com.tomatoclock.tools.FileUtils;
 import network.scau.com.tomatoclock.view.NewTaskActivity;
 import network.scau.com.tomatoclock.view.TaskListActivity;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by ZhengHy on 2016/7/5 0005.
@@ -25,13 +35,14 @@ public class TasksListVm {
     /**NewTaskActivity的实例 */
     private NewTaskActivity newTaskActivity;
 
-    private TomatoTasksList tomatoTasksList = BaseApplication.tomatoTasksList;
+    private TomatoTasksList tomatoTasksList ;
 
     private TomatoTasksListAdapter tasksListAdapter;
 
 
     public TasksListVm(TaskListActivity taskListActivity) {
         this.taskListActivity = taskListActivity;
+        readData();
     }
 
     public void setTasksListAdapter(TomatoTasksListAdapter tasksListAdapter) {
@@ -44,6 +55,9 @@ public class TasksListVm {
 
 
     // --------------------- 以下为业务逻辑 ----------------------
+
+    public static final String SAVE_TEXT_NAME = "DATA";
+
     /**进入创建新Taskactivity */
     public void intoNewTaskActivity(){
         currentNewTask = new TomatoTask();
@@ -66,11 +80,68 @@ public class TasksListVm {
         currentNewTask = null;
     }
 
+    public void readData(){
+        TomatoTasksList tomatoTasksList = readLocalList();
+        if(tomatoTasksList==null){
+            this.tomatoTasksList = TomatoTasksList.getInstance();
+        }else{
+            this.tomatoTasksList = TomatoTasksList.getInstance(tomatoTasksList.getListLotalTasks());
+        }
+    }
+
+    /**保存数据 */
+    public void saveData(){
+       saveInLocal();
+    }
+
+    /**
+     * 读取本地的任务列表
+     */
+    private TomatoTasksList readLocalList() {
+        Gson gson = new Gson();
+        String stringJson = FileUtils.readStringJson(taskListActivity, SAVE_TEXT_NAME);
+        TomatoTasksList tomatoTasksList = gson.fromJson(stringJson, TomatoTasksList.class);
+        return tomatoTasksList;
+    }
+
+    /**将列表保存到本地 */
+    public void saveInLocal(){
+        Gson gson = new Gson();
+        String listJson = gson.toJson(tomatoTasksList);
+
+        FileUtils.saveStringJson(taskListActivity,SAVE_TEXT_NAME,listJson);
+    }
+
+
     /**取消 从新任务activity回到主activity*/
     public void cancleBackToListActivity(View view){
         newTaskActivity.dismissQuitDialog();
     }
 
+    // ------  任务列表逻辑 ----------------
+
+    /**根据任务开始时间排序 */
+    private void sortByStartTime(){
+        Collections.sort(tomatoTasksList.getListLotalTasks(), new Comparator<TomatoTask>() {
+            @Override
+            public int compare(TomatoTask tomatoTask, TomatoTask another) {
+
+                if(tomatoTask.getDateCreateDate()==null){
+                    return 1;
+                }
+
+                if(another.getDateCreateDate()==null){
+                    return -1;
+                }
+
+                long createDate = tomatoTask.getDateCreateDate().getTime();
+                long createDateAno = another.getDateCreateDate().getTime();
+
+
+                return (int) (createDate-createDateAno);
+            }
+        });
+    }
 
 
     //  ------  创建新任务逻辑 --------------
@@ -163,6 +234,9 @@ public class TasksListVm {
         }else if(sign == SIGN_CREATENEWTASK_SUCCESS){
             newTaskActivity.showToast("Create Success");
             Log.d("tomato",currentNewTask.toString());
+            tomatoTasksList.addTask(currentNewTask);
+            sortByStartTime();
+            tasksListAdapter.notifyDataSetChanged();
             newTaskActivityFinish(null);
         }
     }

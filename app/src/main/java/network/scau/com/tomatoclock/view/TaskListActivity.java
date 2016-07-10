@@ -50,7 +50,6 @@ public class TaskListActivity extends BaseActivity {
         rcTasksList.setAdapter(tasksListAdapter);
         rcTasksList.setItemAnimator(new DefaultItemAnimator());
 
-
         RxView.clicks(binding.fab)
                 .throttleFirst(2, TimeUnit.SECONDS)
                 .subscribe(new Action1<Void>() {
@@ -81,9 +80,15 @@ public class TaskListActivity extends BaseActivity {
         if (id == R.id.action_settings) {
             return true;
         }else if(id == R.id.action_quit){
-            finish();
+            tasksListVm.saveData();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        tasksListVm.saveData();
+        super.onDestroy();
     }
 }

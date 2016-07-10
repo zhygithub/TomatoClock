@@ -10,11 +10,9 @@ import network.scau.com.tomatoclock.model.TomatoTasksList;
 
 public class BaseApplication extends Application {
 
-    public static TomatoTasksList  tomatoTasksList ;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        tomatoTasksList = TomatoTasksList.getInstance();
     }
 }
